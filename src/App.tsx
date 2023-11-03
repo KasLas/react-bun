@@ -1,5 +1,5 @@
-// import { useState } from 'react'
 import reactLogo from './assets/react.svg';
+import { effect } from '@preact/signals-react';
 import viteLogo from '/vite.svg';
 import './App.css';
 import NewComponent from './NewComponent';
@@ -7,8 +7,13 @@ import { count } from './signals/signals';
 
 function App() {
   function handleClick() {
+    // update the signal(global useState value directly)
     count.value = ++count.value;
   }
+
+  effect(() => {
+    console.log('dependent signal has changed', count.value);
+  });
 
   return (
     <>
